@@ -1,0 +1,31 @@
+{
+  "node": {
+    "@attrib1": "1",
+    "@attrib2": "2",
+    "child": [
+      {
+        "@child-attrib1": "child1 attribute 1",
+        "@child-attrib2": "child1 attribute 2"
+      },
+      {
+        "@child-attrib1": "child2 attribute 1",
+        "@child-attrib2": "child2 attribute 2"
+      },
+      {
+        "@grandchilds": "little ones",
+        "grandchild": [
+          {
+            "@grandchild-attrib1": "grandchild1 attribute 1"
+          },
+          {
+            "@grandchild-attrib1": "grandchild2 attribute 1"
+          }
+        ]
+      },
+      {
+        "@child-attrib1": "child3 attribute 1",
+        "@child-attrib2": "child3 attribute 2"
+      }
+    ]
+  }
+}
