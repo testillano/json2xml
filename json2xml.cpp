@@ -15,6 +15,7 @@ class JsonSaxConsumer : public nlohmann::json::json_sax_t
   std::stringstream result_;
   std::stringstream current_object_;
   std::stack<std::string> nodes_stack_;
+  std::string key_;
 
   public:
 
@@ -60,6 +61,7 @@ class JsonSaxConsumer : public nlohmann::json::json_sax_t
 
   bool start_object(std::size_t elements) override
   {
+    nodes_stack_.push(key_);
     if (!started_) { started_ = true ; return true; }
     indent_ += XML_INDENTATION_SPACES;
     result_ << std::string(indent_, ' ') << "<" << nodes_stack_.top();
@@ -76,11 +78,13 @@ class JsonSaxConsumer : public nlohmann::json::json_sax_t
     if (close == "") result_ << "</" << nodes_stack_.top() << ">";
     result_ << "\n";
     current_object_.str("");
+    nodes_stack_.pop();
     return true;
   }
 
   bool start_array(std::size_t elements) override
   {
+    nodes_stack_.push(key_);
     result_ << current_object_.str() << ">\n";
     current_object_.str("");
     return true;
@@ -96,7 +100,7 @@ class JsonSaxConsumer : public nlohmann::json::json_sax_t
   bool key(string_t& val) override
   {
     if (val[0] != '@') {
-      nodes_stack_.push(val);
+      key_ = val;
     }
     else {
       current_object_ << " " << val.substr(1) << "=";
