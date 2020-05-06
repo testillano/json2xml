@@ -23,7 +23,7 @@ This will output the xml representation, or an error.
 
     ./json2xml test
 
-Same as above, but using a harcoded json string (check json2xml.cpp, line 135).
+Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/master/json2xml.cpp#L141)).
 
 ## Restrictions
 
