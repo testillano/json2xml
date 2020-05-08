@@ -1,0 +1,11 @@
+{
+   "grandfather": {
+      "father": {
+         "child": {
+            "@toys": "Train",
+            "@homeWork": "Maths",
+            "@bestFriend": "Felix"
+         }
+      }
+   }
+}
