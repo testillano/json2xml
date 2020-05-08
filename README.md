@@ -42,3 +42,6 @@ For example, take a look to `check.py` script, which injects the xml got from `j
     echo $?
     0
 
+## Component test
+
+Go to `./ct` and execute `pytest`.
