@@ -27,20 +27,14 @@ Same as above, but using a harcoded json string (check [here](https://github.com
 
 ## Restrictions
 
-Arguments in json provided must be prefixed with '@'.
+Arguments in json provided must be prefixed with a special character. You can change it at `JsonSaxConsumer` construction ('@' by default).
 
 ## Double check
 
-You could do the opositte (xml to json) using python `xmltodict`:
+You could do the opposite (xml to json) using python `xmltodict`:
 
     pip3 install xmltodict
-
-For example, take a look to `check.py` script, which injects the xml got from `json2xml test.json`:
-
-    python3 check.py > result.json
-    diff test.json result.json
-    echo $?
-    0
+    python3 check.py
 
 ## Component test
 
