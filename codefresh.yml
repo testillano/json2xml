@@ -4,6 +4,7 @@ stages:
   - prepare
   - build
   - test
+
 steps:
   main_clone:
     title: Cloning main repository...
@@ -12,6 +13,13 @@ steps:
     repo: 'testillano/json2xml'
     revision: master
     git: github
+  push_dev_image:
+    title: Pushing Dev Image
+    stage: prepare
+    type: push
+    image_name: codefresh/app
+    registry: my-registry
+    fail_fast: false
   build_dev_image:
     title: Building Dev Image
     stage: prepare
