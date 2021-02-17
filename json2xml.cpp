@@ -160,7 +160,7 @@ class JsonSaxConsumer : public nlohmann::json::json_sax_t
 int main(int argc, char *argv[])
 {
   if (argc != 2) {
-    std::cerr << "Usage: json2xml <json file|test>" << std::endl;
+    std::cerr << "Usage: json2xml <json file|test: harcoded test>" << std::endl;
     return 1;
   }
 
