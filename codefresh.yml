@@ -1,0 +1,47 @@
+version: '1.0'
+stages:
+  - checkout
+  - prepare
+  - build
+steps:
+  main_clone:
+    title: Cloning main repository...
+    stage: checkout
+    type: git-clone
+    repo: 'testillano/json2xml'
+    revision: master
+    git: github
+  build_dev_image:
+    title: Building Dev Image
+    stage: prepare
+    type: build
+    image_name: cmake
+    working_directory: ./dev/
+    tag: 'latest'
+    dockerfile: Dockerfile
+  create_makefiles:
+    title: Create Makefiles
+    stage: prepare
+    image: ${{build_dev_image}}
+    commands:
+      - cmake .
+  compile_my_sources:
+    title: Compile
+    stage: build
+    image: ${{build_dev_image}}
+    commands:
+      - make
+  build_test_image:
+    title: Building Test Image
+    stage: build
+    type: build
+    image_name: pytest
+    working_directory: ./ct/
+    tag: 'latest'
+    dockerfile: Dockerfile
+  run_my_tests:
+    title: Test
+    stage: build
+    image: ${{build_test_image}}
+    commands:
+      - pytest
