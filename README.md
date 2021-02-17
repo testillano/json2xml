@@ -1,6 +1,8 @@
-# json2xml
+# C++ json2xml converter
 
-C++ Converter from Json to XML
+C++ header-only converter from Json to XML.
+Include [./json2xml.hpp](./json2xml.hpp) into your project.
+
 CICD tested with [Codefresh](https://codefresh.io/).
 
 ## Build and test natively
@@ -69,4 +71,11 @@ Now, you will build the compilation docker image, and then build:
 ### Restrictions
 
 Arguments in json provided must be prefixed with a special character. You can change it at `JsonSaxConsumer` construction ('@' by default).
+
+### Contributing
+
+Please, execute `astyle` formatting before any pull request:
+
+    docker pull frankwolf/astyle
+    docker run -it --rm -v $PWD:/data frankwolf/astyle ./json2xml.hpp ./example.cpp
 
