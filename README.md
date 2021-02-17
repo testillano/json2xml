@@ -5,7 +5,7 @@ Include [./json2xml.hpp](./json2xml.hpp) into your project.
 
 CICD tested with [Codefresh](https://codefresh.io/).
 
-## Build and test natively
+## Build example and test natively
 
 ### Build
 
@@ -24,7 +24,7 @@ Then, you shall change directory to `ct` and just execute `pytest`:
     cd ct
     pytest
 
-### Execute
+### Execute example
 
     ./json2xml
 
