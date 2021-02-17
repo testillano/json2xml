@@ -3,6 +3,7 @@ stages:
   - checkout
   - prepare
   - build
+  - test
 steps:
   main_clone:
     title: Cloning main repository...
@@ -19,6 +20,14 @@ steps:
     working_directory: ./dev/
     tag: 'latest'
     dockerfile: Dockerfile
+  build_test_image:
+    title: Building Test Image
+    stage: prepare
+    type: build
+    image_name: pytest
+    working_directory: ./ct/
+    tag: 'latest'
+    dockerfile: Dockerfile
   create_makefiles:
     title: Create Makefiles
     stage: prepare
@@ -31,17 +40,9 @@ steps:
     image: ${{build_dev_image}}
     commands:
       - make
-  build_test_image:
-    title: Building Test Image
-    stage: build
-    type: build
-    image_name: pytest
-    working_directory: ./ct/
-    tag: 'latest'
-    dockerfile: Dockerfile
   run_my_tests:
     title: Test
-    stage: build
+    stage: test
     image: ${{build_test_image}}
     commands:
       - pytest
