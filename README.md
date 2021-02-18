@@ -42,7 +42,7 @@ This will output the xml representation, or an error.
 
     ./json2xml test
 
-Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/master/json2xml.cpp#L141)).
+Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/2f9f547cabf83a57ecb79de0cb9bd1b6dfe66c48/example.cpp#L28)).
 
 #### Double check (manual testing)
 
