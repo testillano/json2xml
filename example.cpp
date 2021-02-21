@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     }
 
     // Consume json to build xml:
-    JsonSaxConsumer consumer;
+    tll::json::JsonSaxConsumer consumer;
     bool success = nlohmann::json::sax_parse(jsonStr, &consumer);
 
     if (!success)
