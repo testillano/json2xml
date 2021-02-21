@@ -50,14 +50,14 @@ int main(int argc, char *argv[])
     }
 
     // Consume json to build xml:
-    tll::json::JsonSaxConsumer consumer;
+    tll::json::JsonSaxConsumer consumer(2);
     bool success = nlohmann::json::sax_parse(jsonStr, &consumer);
 
     if (!success)
         std::cerr << "Conversion error !" << std::endl;
 
     // output xml
-    std::cout << consumer.getResult().str();
+    std::cout << consumer.getXmlString();
 
     // exit status
     return success ? 0:1;

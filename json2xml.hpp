@@ -42,14 +42,13 @@ SOFTWARE.
 // Nlohmann (https://github.com/nlohmann/json)
 #include "nlohmann/json.hpp"
 
-#define XML_INDENTATION_SPACES 4
-
 namespace tll {
 namespace json {
 
 class JsonSaxConsumer : public nlohmann::json::json_sax_t
 {
     // private members
+    int tab_spaces_;
     char attr_prefix_;
     int indent_;
     std::stringstream result_;
@@ -69,19 +68,28 @@ public:
     /**
     * Default constructor
     *
-    * @param attrPrefix You could set any other value for attribute prefix, '@' by default
+    * @param tabSpaces Indentation spaces for xml representation, 4 by default. Must be >= 1 or 4 will be asigned.
+    * @param attrPrefix You could set any other value for attribute prefix, '@' by default.
     */
-    JsonSaxConsumer(char attrPrefix = '@') : attr_prefix_(attrPrefix),
+    JsonSaxConsumer(int tabSpaces = 4, char attrPrefix = '@'):
+        tab_spaces_(tabSpaces>=1 ? tabSpaces:4),
+        attr_prefix_(attrPrefix),
         has_attributes_(false),
-        indent_(-XML_INDENTATION_SPACES) {};
+        indent_(-tab_spaces_) {};
 
     /**
-    * Returns the xml stringstream representation
+    * Returns the resulting xml stringstream representation
     */
-    const std::stringstream & getResult() const {
+    const std::stringstream & getXmlStream() const {
         return result_;
     }
 
+    /**
+    * Returns the resulting xml string representation
+    */
+    std::string getXmlString() const {
+        return result_.str();
+    }
 
     // nlohmann sax virtual methods
     bool null() override
@@ -130,7 +138,7 @@ public:
     {
         if (key_ == "") return true; // global object condition (first start object)
         nodes_stack_.push(key_); // push on starts
-        indent_ += XML_INDENTATION_SPACES; // increase indentation on object start
+        indent_ += tab_spaces_; // increase indentation on object start
 
         if (indent_ != 0) {
             // New object when previous hadn't attributes:
@@ -155,7 +163,7 @@ public:
         }
 
         nodes_stack_.pop(); // pop on ends
-        indent_ -= XML_INDENTATION_SPACES; // decrease indentation on object end
+        indent_ -= tab_spaces_; // decrease indentation on object end
         return true;
     }
 
