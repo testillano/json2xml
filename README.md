@@ -1,9 +1,60 @@
+[TOC]
+
 # C++ json2xml converter
 
 C++ header-only converter from Json to XML.
 Include [json2xml.hpp](include/ert/json2xml.hpp) into your project.
+See more at Integration.
 
 CICD tested with [Codefresh](https://codefresh.io/).
+
+## Integration
+
+[`json2xml.hpp`](https://github.com/testillano/json2xml/blob/master/include/ert/json2xml.hpp) is the single required file in `include/ert` or [released here](https://github.com/testillano/json2xml/releases). You need to add
+
+```cpp
+#include <ert/json2xml.hpp>
+```
+
+### CMake
+
+#### Embedded
+
+To embed the library directly into an existing CMake project, place the entire source tree in a subdirectory and call `add_subdirectory()` in your `CMakeLists.txt` file:
+
+```cmake
+# Typically you don't care so much for a third party library's examples to be
+# run from your own project's code.
+set(JSON2XML_BuildExamples OFF CACHE INTERNAL "")
+
+add_subdirectory(ert_json2xml)
+...
+add_library(foo ...)
+...
+target_link_libraries(foo PRIVATE ert_json2xml::ert_json2xml)
+```
+
+##### Embedded (FetchContent)
+
+Since CMake v3.11,
+[FetchContent](https://cmake.org/cmake/help/v3.11/module/FetchContent.html) can be used to automatically download the repository as a dependency at configure type.
+
+Example:
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(ert_json2xml
+  GIT_REPOSITORY https://github.com/testillano/json2xml.git
+  GIT_TAG v1.0.1)
+
+FetchContent_GetProperties(ert_json2xml)
+if(NOT ert_json_POPULATED)
+  FetchContent_Populate(ert_json2xml)
+  add_subdirectory(${ert_json2xml_SOURCE_DIR} ${ert_json2xml_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+target_link_libraries(foo PRIVATE ert_json2xml::ert_json2xml)
+```
 
 ## Build example and test natively
 
