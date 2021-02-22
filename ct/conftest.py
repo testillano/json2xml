@@ -47,7 +47,7 @@ def json2xml():
         assert False, "Could not open/read file '{}'".format(testFile)
 
     # After conversion:
-    converter = os.getcwd() + "/../json2xml"
+    converter = os.getcwd() + "/../examples/json2xml"
     args = (converter, testFile)
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()

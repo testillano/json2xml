@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "json2xml.hpp"
+#include <ert/json2xml.hpp>
 
 
 int main(int argc, char *argv[])
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     }
 
     // Consume json to build xml:
-    tll::json::JsonSaxConsumer consumer(2);
+    ert::JsonSaxConsumer consumer(2);
     bool success = nlohmann::json::sax_parse(jsonStr, &consumer);
 
     if (!success)
