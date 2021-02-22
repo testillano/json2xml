@@ -26,7 +26,7 @@ To embed the library directly into an existing CMake project, place the entire s
 ```cmake
 # Typically you don't care so much for a third party library's examples to be
 # run from your own project's code.
-set(JSON2XML_BuildExamples OFF CACHE INTERNAL "")
+set(ERT_JSON2XML_BuildExamples OFF CACHE INTERNAL "")
 
 add_subdirectory(ert_json2xml)
 ...
