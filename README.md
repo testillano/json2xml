@@ -1,7 +1,7 @@
 # C++ json2xml converter
 
 C++ header-only converter from Json to XML.
-Include [./json2xml.hpp](./json2xml.hpp) into your project.
+Include [json2xml.hpp](include/ert/json2xml.hpp) into your project.
 
 CICD tested with [Codefresh](https://codefresh.io/).
 
@@ -42,7 +42,7 @@ This will output the xml representation, or an error.
 
     ./json2xml test
 
-Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/2f9f547cabf83a57ecb79de0cb9bd1b6dfe66c48/example.cpp#L28)).
+Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/xxxx/examples/main.cpp#L28)).
 
 #### Double check (manual testing)
 
@@ -54,9 +54,13 @@ You could do the opposite (xml to json) using python `xmltodict`:
 
 #### Build
 
-You may remove cmake cache from native workflow described above:
+You may remove `cmake` cache from native workflow described above:
 
-    rm CMakeCache.txt
+    find . -name CMakeCache.txt -exec rm {} \;
+
+Or perhaps you could execute:
+
+    git clean -xdf
 
 Now, you will build the compilation docker image, and then build:
 
@@ -77,5 +81,5 @@ Arguments in json provided must be prefixed with a special character. You can ch
 Please, execute `astyle` formatting before any pull request:
 
     docker pull frankwolf/astyle
-    docker run -it --rm -v $PWD:/data frankwolf/astyle ./json2xml.hpp ./example.cpp
+    docker run -it --rm -v $PWD:/data frankwolf/astyle include/ert/json2xml.hpp examples/main.cpp
 

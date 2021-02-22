@@ -31,8 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef TLL_JSON_JSONSAXCONSUMER_H_
-#define TLL_JSON_JSONSAXCONSUMER_H_
+#ifndef ERT_JSONSAXCONSUMER_H_
+#define ERT_JSONSAXCONSUMER_H_
 
 // Standard
 #include <iomanip>
@@ -40,22 +40,21 @@ SOFTWARE.
 #include <stack>
 
 // Nlohmann (https://github.com/nlohmann/json)
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
-namespace tll {
-namespace json {
+namespace ert {
 
 class JsonSaxConsumer : public nlohmann::json::json_sax_t
 {
     // private members
     int tab_spaces_;
     char attr_prefix_;
+    bool has_attributes_;
     int indent_;
     std::stringstream result_;
     std::stringstream current_object_;
     std::stack<std::string> nodes_stack_;
     std::string key_;
-    bool has_attributes_;
 
     // private functions
     const std::string & get_top() {
@@ -133,6 +132,12 @@ public:
         has_attributes_ = true;
         return true;
     }
+    bool binary(binary_t& val) override
+    {
+        current_object_ << std::quoted("binary"); // TODO
+        has_attributes_ = true;
+        return true;
+    }
 
     bool start_object(std::size_t elements) override
     {
@@ -203,7 +208,6 @@ public:
     }
 };
 
-}
 }
 
 #endif
