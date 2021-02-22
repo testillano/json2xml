@@ -17,7 +17,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 ###########################
 # Options & Configuration #
 ###########################
-option(JSON2XML_BuildExamples "Build the examples." ${MAIN_PROJECT})
+option(ERT_JSON2XML_BuildExamples "Build the examples." ${MAIN_PROJECT})
 set(ERT_JSON2XML_TARGET_NAME               ${PROJECT_NAME})
 set(ERT_JSON2XML_INCLUDE_BUILD_DIR         "${PROJECT_SOURCE_DIR}/include/")
 
@@ -81,7 +81,7 @@ target_include_directories(
 ##################
 # Subdirectories #
 ##################
-if (JSON2XML_BuildExamples)
+if (ERT_JSON2XML_BuildExamples)
   add_subdirectory( examples )
 endif()
 
