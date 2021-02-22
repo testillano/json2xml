@@ -26,7 +26,7 @@ Then, you shall change directory to `ct` and just execute `pytest`:
 
 ### Execute example
 
-    ./json2xml
+    examples/json2xml
 
 This will show the correct usage:
 
@@ -34,15 +34,15 @@ This will show the correct usage:
 
 #### Passing file
 
-    ./json2xml test.json
+    examples/json2xml test.json
 
 This will output the xml representation, or an error.
 
 #### Passing 'test' to execute harcoded case
 
-    ./json2xml test
+    examples/json2xml test
 
-Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/xxxx/examples/main.cpp#L28)).
+Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/d2778a1891244603284796df6892733b5362324e/examples/main.cpp#L28)).
 
 #### Double check (manual testing)
 
