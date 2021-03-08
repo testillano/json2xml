@@ -17,7 +17,7 @@ steps:
     title: Building Dev Image
     stage: prepare
     type: build
-    image_name: 'edu1770/${{CF_REPO_NAME}}-dev'
+    image_name: 'testillano/${{CF_REPO_NAME}}-dev'
     tag: 'latest'
     dockerfile: ./dev/Dockerfile
   create_makefiles:
@@ -37,7 +37,7 @@ steps:
     stage: prepare
     type: build
     working_directory: ./ct
-    image_name: 'edu1770/${{CF_REPO_NAME}}-ct'
+    image_name: 'testillano/${{CF_REPO_NAME}}-ct'
     tag: 'latest'
     dockerfile: Dockerfile
   run_my_tests:
