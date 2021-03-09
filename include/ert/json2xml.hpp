@@ -1,16 +1,16 @@
 /*
-    _                 ___                 _
-   (_)               |__ \               | |
+    _                 ___                 _   ______________________________________
+   (_)               |__ \               | |  ______________________________________
     _ ___  ___  _ __    ) |_  ___ __ ___ | |
-   | / __|/ _ \| '_ \  / /\ \/ / '_ ` _ \| | Json-to-xml C++ only-header library
-   | \__ \ (_) | | | |/ /_ >  <| | | | | | | Version 1.0.0
-   | |___/\___/|_| |_|____/_/\_\_| |_| |_|_| https://github.com/testillano/json2xml
-  _/ |
- |__/
+   | / __|/ _ \| '_ \  / /\ \/ / '_ ` _ \| |  Json-to-xml C++ only-header library
+   | \__ \ (_) | | | |/ /_ >  <| | | | | | |  Version 1.0.0
+   | |___/\___/|_| |_|____/_/\_\_| |_| |_|_|  https://github.com/testillano/json2xml
+  _/ |                                        ______________________________________
+ |__/                                         ______________________________________
 
 Licensed under the MIT License <http://opensource.org/licenses/MIT>.
 SPDX-License-Identifier: MIT
-Copyright (c) 2004-2021 Eduardo Ramos <http://www.teslayout.com>.
+Copyright (c) 2020 Eduardo Ramos
 
 Permission is hereby  granted, free of charge, to any  person obtaining a copy
 of this software and associated  documentation files (the "Software"), to deal
