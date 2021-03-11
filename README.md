@@ -149,7 +149,7 @@ Arguments in json provided must be prefixed with a special character. You can ch
 
 ### Contributing
 
-Please, execute `astyle` formatting before any pull request:
+Please, execute `astyle` formatting (using [frankwolf image](https://hub.docker.com/r/frankwolf/astyle)) before any pull request:
 
 ```bash
 $ sources=$(find . -name "*.hpp" -o -name "*.cpp")
