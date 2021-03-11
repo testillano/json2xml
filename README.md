@@ -70,8 +70,10 @@ $ make
 
 On ubuntu you will need python3, pip3 and pytest & xmltodict modules:
 
-    apt-get update && apt-get install -y python3 python3-pip
-    pip3 install pytest xmltodict
+```bash
+$ apt-get update && apt-get install -y python3 python3-pip
+$ pip3 install pytest xmltodict
+```
 
 Then, you shall change directory to `ct` and just execute `pytest`:
 
