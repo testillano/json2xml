@@ -2,7 +2,7 @@
 # Versions #
 ############
 cmake_minimum_required (VERSION 3.5.1)
-project(ert_json2xml VERSION 1.0.0 LANGUAGES CXX)
+project(ert_json2xml LANGUAGES CXX)
 
 set(MAIN_PROJECT OFF)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)

@@ -61,8 +61,10 @@ target_link_libraries(foo PRIVATE ert_json2xml::ert_json2xml)
 
 ### Build
 
-    cmake .
-    make
+```bash
+$ cmake .
+$ make
+```
 
 ### Component test
 
@@ -73,26 +75,31 @@ On ubuntu you will need python3, pip3 and pytest & xmltodict modules:
 
 Then, you shall change directory to `ct` and just execute `pytest`:
 
-    cd ct
-    pytest
+```bash
+$ cd ct
+$ pytest
+```
 
 ### Execute example
 
-    examples/json2xml
-
-This will show the correct usage:
-
-    Usage: json2xml <json file|test: harcoded test>
+```bash
+$ examples/json2xml
+$ Usage: json2xml <json file|test: harcoded test>
+```
 
 #### Passing file
 
-    examples/json2xml test.json
+```bash
+$ examples/json2xml test.json
+```
 
 This will output the xml representation, or an error.
 
 #### Passing 'test' to execute harcoded case
 
-    examples/json2xml test
+```bash
+$ examples/json2xml test
+```
 
 Same as above, but using a harcoded json string (check [here](https://github.com/testillano/json2xml/blob/d2778a1891244603284796df6892733b5362324e/examples/main.cpp#L28)).
 
@@ -100,7 +107,9 @@ Same as above, but using a harcoded json string (check [here](https://github.com
 
 You could do the opposite (xml to json) using python `xmltodict`:
 
-    python3 check.py
+```bash
+$ python3 check.py
+```
 
 ### Build and test with docker
 
@@ -108,21 +117,29 @@ You could do the opposite (xml to json) using python `xmltodict`:
 
 You may remove `cmake` cache from native workflow described above:
 
-    find . -name CMakeCache.txt -exec rm {} \;
+```bash
+$ find . -name CMakeCache.txt -exec rm {} \;
+```
 
 Or perhaps you could execute:
 
-    git clean -xdf
+```bash
+$ git clean -xdf
+```
 
 Now, you will build the compilation docker image, and then build:
 
-    docker build -f dev/Dockerfile . -t dev_image:latest
-    docker run --rm -v $PWD:/code -w /code dev_image:latest bash -c "cmake . && make"
+```bash
+$ docker build -f dev/Dockerfile . -t dev_image:latest
+$ docker run --rm -v $PWD:/code -w /code dev_image:latest bash -c "cmake . && make"
+```
 
 #### Component test
 
-    docker build -f ct/Dockerfile . -t ct_image:latest
-    docker run --rm -v $PWD:/code -w /code/ct ct_image:latest
+```bash
+$ docker build -f ct/Dockerfile . -t ct_image:latest
+$ docker run --rm -v $PWD:/code -w /code/ct ct_image:latest
+```
 
 ### Restrictions
 
@@ -132,6 +149,8 @@ Arguments in json provided must be prefixed with a special character. You can ch
 
 Please, execute `astyle` formatting before any pull request:
 
-    docker pull frankwolf/astyle
-    docker run -it --rm -v $PWD:/data frankwolf/astyle include/ert/json2xml.hpp examples/main.cpp
+```bash
+$ sources=$(find . -name "*.hpp" -o -name "*.cpp")
+$ docker run -it --rm -v $PWD:/data frankwolf/astyle ${sources}
+```
 
