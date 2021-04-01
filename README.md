@@ -1,5 +1,3 @@
-[TOC]
-
 # C++ json2xml converter
 
 C++ header-only converter from Json to XML.
