@@ -1,5 +1,9 @@
 # C++ json2xml converter
 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/testillano/json2xml/graphs/commit-activity)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/testillano)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 C++ header-only converter from Json to XML.
 
 Include [json2xml.hpp](include/ert/json2xml.hpp) into your project.
