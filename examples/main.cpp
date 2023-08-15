@@ -42,46 +42,20 @@ SOFTWARE.
 int main(int argc, char *argv[])
 {
     if (argc != 2) {
-        std::cerr << "Usage: json2xml <json file|test: harcoded test>" << std::endl;
+        std::cerr << "Usage: json2xml <json file>" << std::endl;
         return 1;
     }
 
     std::string argument = argv[1];
     std::string jsonStr;
 
-    if (argument != "test") {
-        std::ifstream ifs(argument);
-        std::stringstream ss;
-        ss << ifs.rdbuf();
-        jsonStr = ss.str();
-        if (jsonStr == "") {
-            std::cerr << "Cannot read file provided !" << std::endl;
-            return 1;
-        }
-    }
-    else {
-        jsonStr = R"(
-{
-    "grandfather": {
-        "father": {
-            "child": [
-                {
-                    "@name": "Jose",
-                    "@bestFriend": "Maria"
-                },
-                {
-                    "@name": "Maria",
-                    "@bestFriend": "Jose"
-                }
-            ],
-            "student": {
-                "@favoriteBook": "The Gods Themselves",
-                "@age": "21"
-            }
-        }
-    }
-}
-    )";
+    std::ifstream ifs(argument);
+    std::stringstream ss;
+    ss << ifs.rdbuf();
+    jsonStr = ss.str();
+    if (jsonStr == "") {
+        std::cerr << "Cannot read file provided !" << std::endl;
+        return 1;
     }
 
     // Consume json to build xml:
