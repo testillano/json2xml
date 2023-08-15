@@ -163,6 +163,12 @@ You could do the opposite (xml to json) using python `xmltodict` module:
 $> python3 util/xml2json.py test.xml
 ```
 
+You can also use this beautify perl script for json output, courtesy of [yanOnGithub](https://github.com/jqlang/jq/issues/643#issuecomment-392384015):
+
+```bash
+$> python3.9 util/xml2json.py test.xml | perl util/beautifyJson.perl
+```
+
 ### Build and test with docker
 
 #### Build
