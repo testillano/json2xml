@@ -4,7 +4,7 @@
 |    (_)               |__ \               | |  |
 |     _ ___  ___  _ __    ) |_  ___ __ ___ | |  |
 |    | / __|/ _ \| '_ \  / /\ \/ / '_ ` _ \| |  |  Json-to-xml C++ only-header library
-|    | \__ \ (_) | | | |/ /_ >  <| | | | | | |  |  Version 1.0.0
+|    | \__ \ (_) | | | |/ /_ >  <| | | | | | |  |  Version 1.1.0
 |    | |___/\___/|_| |_|____/_/\_\_| |_| |_|_|  |  https://github.com/testillano/json2xml
 |   _/ |                                        |
 |  |__/                                         |
@@ -33,8 +33,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 #include <ert/json2xml.hpp>
 
@@ -46,29 +48,22 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    std::string argument = argv[1];
-    std::string jsonStr;
-
-    std::ifstream ifs(argument);
-    std::stringstream ss;
-    ss << ifs.rdbuf();
-    jsonStr = ss.str();
-    if (jsonStr == "") {
+    std::ifstream ifs(argv[1]);
+    if (!ifs) {
         std::cerr << "Cannot read file provided !" << std::endl;
         return 1;
     }
+    std::stringstream ss;
+    ss << ifs.rdbuf();
 
     // Consume json to build xml:
     ert::JsonSaxConsumer consumer(2);
-    bool success = nlohmann::json::sax_parse(jsonStr, &consumer);
-
-    if (!success)
-        std::cerr << "Conversion error !" << std::endl;
+    if (!nlohmann::json::sax_parse(ss.str(), &consumer)) {
+        std::cerr << "Conversion error: " << consumer.getError() << std::endl;
+        return 1;
+    }
 
     // output xml
-    std::cout << consumer.getXmlString();
-
-    // exit status
-    return success ? 0:1;
+    std::cout << consumer.getXmlString() << std::endl;
+    return 0;
 }
-

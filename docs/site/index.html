@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+  Landing page of the json2xml GitHub Pages site (copied to the site root by the
+  'deploy_pages' CI job). Each section is deployed by the same job.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="json2xml documentation: doxygen, coverage">
+  <title>json2xml documentation</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+    h1 { margin-bottom: 0.25rem; }
+    .brief { margin-top: 0; opacity: 0.8; }
+    ul.sections { list-style: none; padding: 0; display: grid; gap: 1rem; }
+    ul.sections a {
+      display: block;
+      padding: 1rem;
+      border: 1px solid currentColor;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    ul.sections a:hover, ul.sections a:focus-visible { outline: 3px solid #1abc9c; outline-offset: 2px; }
+    .title { font-weight: bold; font-size: 1.1rem; }
+    .desc { display: block; opacity: 0.8; }
+    footer { margin-top: 2rem; font-size: 0.9rem; opacity: 0.8; }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>json2xml</h1>
+    <p class="brief">C++ header-only json to xml converter, based on nlohmann json.</p>
+  </header>
+
+  <main>
+    <h2>Documentation</h2>
+    <ul class="sections">
+      <li>
+        <a href="doxygen/">
+          <span class="title">Source code (doxygen)</span>
+          <span class="desc">The JsonSaxConsumer class and the project README.</span>
+        </a>
+      </li>
+      <li>
+        <a href="coverage/">
+          <span class="title">Unit test coverage</span>
+          <span class="desc">lcov report of the unit tests (Debug build) over the header.</span>
+        </a>
+      </li>
+      <!-- Add a card for every new section deployed by 'deploy_pages' -->
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      <a href="https://github.com/testillano/json2xml">Source repository</a> |
+      <a href="https://github.com/testillano/json2xml/releases">Releases</a>
+    </p>
+  </footer>
+
+</body>
+</html>

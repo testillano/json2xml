@@ -1,0 +1,19 @@
+# Doxygen configuration (only the non default settings). Run 'doxygen' from this
+# directory: the html goes to ./html. The CI ('doxygen' job) uses this file too.
+PROJECT_NAME           = "json2xml"
+PROJECT_NUMBER         = 1.1.0
+PROJECT_BRIEF          = "C++ header-only json to xml converter"
+OUTPUT_DIRECTORY       = .
+INPUT                  = ../../include ../../README.md
+FILE_PATTERNS          = *.hpp *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE = ../../README.md
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+SOURCE_BROWSER         = YES

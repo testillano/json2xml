@@ -1,0 +1,120 @@
+name: CI
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+    tags:
+    - v*.*.*
+
+  pull_request:
+    branches:
+    - master
+
+permissions:
+  contents: read
+
+jobs:
+  # Debug build (coverage instrumented), unit tests, component tests and the
+  # coverage report for the GitHub Pages site (coverage/, badge.json).
+  build_and_test:
+    name: Build, test and coverage
+    runs-on: ubuntu-24.04
+    steps:
+    -
+      name: Check out the repo
+      uses: actions/checkout@v4
+    -
+      name: Install tools
+      run: sudo apt-get update -qq && sudo apt-get install -y -qq cmake g++ lcov bc python3-pytest python3-xmltodict
+    -
+      name: Build (Debug)
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+        cmake --build build -j "$(nproc)"
+    -
+      name: Unit tests
+      run: ctest --test-dir build --output-on-failure
+    -
+      name: Component tests
+      working-directory: ct
+      run: JSON2XML_BIN="${GITHUB_WORKSPACE}/build/examples/json2xml" pytest-3
+    -
+      name: Coverage report
+      run: |
+        OPTS="--ignore-errors mismatch,inconsistent,unused"
+        lcov --capture --directory build --output-file total.info ${OPTS}
+        lcov --extract total.info "${GITHUB_WORKSPACE}/include/*" --output-file coverage.info ${OPTS}
+        genhtml coverage.info --output-directory coverage
+        cp coverage.info coverage/lcov.info
+        value=$(lcov --summary coverage.info 2>&1 | grep -oP 'lines\.+: \K[0-9.]+' | head -n 1)
+        if [ "$(echo "${value} < 50" | bc -l)" = "1" ]; then
+          color="red"
+        elif [ "$(echo "${value} < 80" | bc -l)" = "1" ]; then
+          color="orange"
+        else
+          color="brightgreen"
+        fi
+        echo '{"schemaVersion":1,"label":"coverage","message":"'${value}'%","color":"'${color}'"}' > coverage/badge.json
+        cat coverage/badge.json
+    -
+      name: Upload coverage html
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-html
+        path: coverage
+        retention-days: 1
+
+  doxygen:
+    uses: testillano/workflows/.github/workflows/doxygen.yml@v1
+    with:
+      doxyfile_dir: docs/doxygen
+      doxyfile_overrides: |
+        PROJECT_NUMBER=${{ github.ref_name }}
+
+  deploy_pages:
+    needs: [build_and_test, doxygen]
+    name: Deploy GitHub Pages
+    runs-on: ubuntu-latest
+    # Only the master branch deploys: the 'github-pages' environment protection
+    # rejects tags and pull requests, and every rejected run leaves a failed
+    # deployment (shown by the Pages badge).
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    -
+      # First: checkout cleans the workspace, so it must precede the downloads
+      name: Check out the repo
+      uses: actions/checkout@v4
+    -
+      name: Setup Pages
+      uses: actions/configure-pages@v5
+    -
+      name: Download doxygen html
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ needs.doxygen.outputs.artifact_name }}
+        path: site/doxygen
+    -
+      name: Download coverage html
+      uses: actions/download-artifact@v4
+      with:
+        name: coverage-html
+        path: site/coverage
+    -
+      name: Assemble GitHub Pages site
+      run: cp docs/site/index.html site/index.html
+    -
+      name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: site
+    -
+      name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
