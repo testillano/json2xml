@@ -11,3 +11,13 @@ CTestTestfile.cmake
 _deps
 json2xml
 __pycache__
+unit-test
+build/
+coverage/
+*.gcda
+*.gcno
+*.info
+docs/doxygen/html/
+.pytest_cache
+lib/
+ut/unit-test*.cmake
